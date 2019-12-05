@@ -1,0 +1,23 @@
+{
+    "agent": {
+        "type": "DPPO",
+        "buffer_size": 1000,
+        "sample_batch_size": 64,
+        "sub_train_batch":64,
+        "train_epochs":2,
+        "scheduled_timesteps": 200000,
+        "gamma":0.9,
+        "lambda_":0.5,
+        "use_gae":true
+    },
+    "model": {
+        "type": "PPO",
+        "lr_init":1e-3,
+        "lr_strategy_spec":{
+            "type": "exponential_decay",
+            "decay_steps": 100,
+            "decay_rate": 0.9
+        },
+        "global_norm_clip":40
+    }
+}

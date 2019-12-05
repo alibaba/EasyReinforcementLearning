@@ -1,0 +1,23 @@
+{
+    "agent": {
+        "type": "A3C",
+        "sample_batch_size": 64,
+        "buffer_size": 10000,
+        "batch_size": 64,
+        "scheduled_timesteps": 30000,
+        "gamma":0.9,
+        "lambda_":0.5,
+        "use_gae":true
+    },
+    "model": {
+        "type": "PG",
+        "gamma":0.95,
+        "lr_init":1e-2,
+        "lr_strategy_spec":{
+            "type": "polynomial_decay",
+            "decay_steps": 10000,
+            "end_learning_rate": 1e-4
+        },
+        "global_norm_clip":40
+    }
+}

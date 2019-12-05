@@ -1,0 +1,32 @@
+{
+    "agent": {
+        "type": "Apex",
+        "sample_batch_size": 8,
+        "buffer_size": 50000,
+        "prioritized_replay": false,
+        "prioritized_replay_alpha": 0.6,
+        "prioritized_replay_beta": 0.4,
+        "batch_size": 512,
+        "sync_target_frequency": 200,
+        "exploration_timesteps": 40000,
+        "scheduled_timesteps": 300000,
+        "learning_starts": 1000
+    },
+    "model": {
+        "type": "DQN",
+        "n_step": 3,
+        "gamma":0.95,
+        "init_lr":1e-3,
+        "lr_strategy_spec":{
+            "type": "exponential_decay",
+            "decay_steps": 1000,
+            "decay_rate": 0.9
+        },
+        "global_norm_clip":40,
+        "dueling":false,
+        "double_q":false,
+        "num_atoms":11,
+        "v_min":0,
+        "v_max":25
+    }
+}

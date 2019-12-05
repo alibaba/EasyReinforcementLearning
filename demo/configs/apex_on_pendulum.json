@@ -1,0 +1,36 @@
+{
+    "agent": {
+        "type": "Apex",
+        "sample_batch_size": 8,
+        "buffer_size": 50000,
+        "prioritized_replay": false,
+        "prioritized_replay_alpha": 0.6,
+        "prioritized_replay_beta": 0.4,
+        "batch_size": 1024,
+        "sync_target_frequency": 200,
+        "scheduled_timesteps": 200000,
+        "learning_starts": 2000
+    },
+    "model": {
+        "type": "DDPG",
+        "gamma":0.99,
+        "actor_lr_init":3e-3,
+        "actor_lr_strategy_spec":{
+            "type": "polynomial_decay",
+            "decay_steps": 10000,
+            "end_learning_rate": 1e-4
+        },
+        "global_norm_clip":100,
+        "critic_lr_init":3e-3,
+        "critic_lr_strategy_spec":{
+            "type": "polynomial_decay",
+            "decay_steps": 13000,
+            "end_learning_rate": 1e-3
+        },
+        "ornstein_uhlenbeck_spec":{
+            "sigma": 0.1,
+            "theta": 0.3,
+            "noise_scale": 1.0
+        }
+    }
+}

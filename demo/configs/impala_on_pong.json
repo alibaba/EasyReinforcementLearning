@@ -1,0 +1,22 @@
+{
+    "agent": {
+        "type": "Impala",
+        "sample_batch_size": 64,
+        "num_env":5,
+        "buffer_size": 1280,
+        "batch_size": 1280,
+        "scheduled_timesteps": 20000000
+    },
+    "model": {
+        "type": "Vtrace",
+        "gamma":0.99,
+        "init_lr":0.0006,
+        "lr_strategy_spec":{
+            "type": "polynomial_decay",
+            "decay_steps": 100000,
+            "end_learning_rate": 0.0
+        },
+        "entroy_coef":0.01,
+        "global_norm_clip":0.03
+    }
+}

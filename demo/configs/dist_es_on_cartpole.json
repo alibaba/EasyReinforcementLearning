@@ -1,0 +1,19 @@
+{
+    "agent": {
+        "type": "ES",
+        "sample_batch_size": 50,
+        "buffer_size": 10000,
+        "scheduled_timesteps": 10000,
+        "run_episode_per_perturbation": 1
+    },
+    "model": {
+        "type": "ES",
+        "init_lr":1e-2,
+        "lr_strategy_spec":{
+            "type": "exponential_decay",
+            "decay_steps": 50,
+            "decay_rate": 0.9
+        },
+        "global_norm_clip":40
+    }
+}
