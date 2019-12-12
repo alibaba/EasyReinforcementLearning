@@ -6,7 +6,25 @@ In recent years, we have witnessed many impressive progresses of reinforcement l
 - implement the sophisticated learning algorithm rather than simply choose one kind of loss, model, and optimizer from TensorFlow (TF)/PyTorch
 - handle the communication of both data (states, actions, rewards, etc.) and model parameters when distributed setting is considered
 
-This repo provides the implementations of many widely-adopted RL algorithms (DQN, PPO, ES, etc.) in both standalone and distributed modes, so that the practitioners are enabled to apply these algorithms with the least effort. We have carefully designed and iteratively refactored our interfaces, offering our users for customizing their own RL algorithms in convenience. In the following, we first describe the features of this repo in detail. Then we empirically evaluate EasyRL. 
+This repo provides the implementations of many widely-adopted RL algorithms (DQN, PPO, ES, etc.) in both standalone and distributed modes, so that the practitioners are enabled to apply these algorithms with the least effort. We have carefully designed and iteratively refactored our interfaces, offering our users for customizing their own RL algorithms in convenience. In the following, we first present a "quick start" example. Then we describe the features of this repo in detail and empirically evaluate EasyRL.
+
+## Quick Start
+EasyRL can be easily installed by:
+```bash
+git clone https://github.com/alibaba/EasyRL.git && cd EasyRL
+pip install -e . --verbose
+```
+We have provided many well-tuned examples (see `demo/`). For instance, users can play [Pong](https://gym.openai.com/envs/Pong-v0/) with DQN by
+```bash
+python demo/run_dqn_on_pong.py
+```
+where we have carefully tuned the hyper-parameters, so that this game Pong is expected to be solved within around 60 minutes (depending on your hardware situations).
+
+<div align=center>
+<img src="https://github.com/AlibabaPAI/easy_rl_doc/blob/master/figures/play_pong.gif?raw=true" width=400 >
+</div>
+
+It is convenient for users to try other hyper-parameters by modifying the `MODEL_CONFIG` dict, `AGENT_CONFIG` dict, or even the `MyDQNModel` class by themselves.
 
 Here is a more comprehensive **[document](https://alibabapai.github.io/easy_rl_doc/)** (currently, there is a theme-related issue, we shall fix it ASAP).
 
@@ -58,11 +76,7 @@ EasyRL provides many popular RL algorithms (in both standalone and distributed s
 |TensorFlow Agent|​x|o|o|x|x|o|x|x|3|
 
 ## Experiments
-We empirically evaluate the performance of EasyRL. Our experiment focuses on the throughput and the convergence rate of our Impala and ApeX implementations. We consider [Pong](https://gym.openai.com/envs/Pong-v0/) as our environment and preprocesses each observation into an array with shape (42, 42, 4).
-
-<div align=center>
-<img src="https://github.com/AlibabaPAI/easy_rl_doc/blob/master/figures/play_pong.gif?raw=true" width=400 >
-</div>
+We empirically evaluate the performance of EasyRL. Our experiment focuses on the throughput and the convergence rate of our Impala and ApeX implementations. We consider Pong as our environment and preprocesses each observation into an array with shape (42, 42, 4).
 
 ### Impala
 First, we study, how the throughput changes along the number of actors increases. As you can see from the following figure, once there are sufficient learners to consume the training samples without blocking the actors (i.e., the blue line corresponding to 16 learners), the throughput is almost linearly proportional to the number of actors.
