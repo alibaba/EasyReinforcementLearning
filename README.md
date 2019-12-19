@@ -21,7 +21,7 @@ python demo/run_dqn_on_pong.py
 where we have carefully tuned the hyper-parameters, so that this game Pong is expected to be solved within around 60 minutes (depending on your hardware situations).
 
 <div align=center>
-<img src="https://github.com/AlibabaPAI/easy_rl_doc/blob/master/figures/play_pong.gif?raw=true" width=400 >
+<img src="https://img.alicdn.com/tfs/TB18Gsvq8v0gK0jSZKbXXbK2FXa-250-300.gif" width=400 >
 </div>
 
 It is convenient for users to try other hyper-parameters by modifying the `MODEL_CONFIG` dict, `AGENT_CONFIG` dict, or even the `MyDQNModel` class by themselves.
@@ -37,7 +37,7 @@ In addition, we provide RL-oriented summary functionalities. Specifically, users
 The interactive nature of RL poses a stong need and motivation of rolling out a large number of trajectories in parallel. A straightforward idea is to replicate the agent as many *actors* where each interacts with its corresponding environment(s) simultaneously. On the other hand, one or more *learners* are desgined to update model parameters w.r.t. the collected trajectories. This idea is first formularized as Gorilla [Nair et al., 2015] and extended into variations like ApeX [Horgan et al., 2018] and Impala [Espeholt et al., 2018].
  
 The *actor-learner* architecture of EasyRL is designed as the following figure presents: 
-![](https://github.com/AlibabaPAI/easy_rl_doc/blob/master/figures/actor_learner_arch.png?raw=true)
+![](https://img.alicdn.com/tfs/TB1zw7vq7Y2gK0jSZFgXXc5OFXa-1324-590.png)
 Conceptually, we categorize involved processes into four roles:
 - *Actor*: periodically pull the latest model parameters, interact with its environment(s), and push the generated trajectories to *buffer* processes.
 - *Learner*: update model parameters once acquired training samples from the *buffer* processes.
@@ -52,10 +52,10 @@ Actually, users are enabled to express their own distributed RL algorithms in su
 EasyRL not only provides a configurable, callable, and reliable RL algorithm suites, but also encourages users to develop their customized algorithms upon our interfaces. The whole module mainly consists of three parts: the *agent* classes (see `easy_rl/agents`), the *model* classes (see `easy_rl/models`), and the utilities (see `easy_rl/utils`). The *agent* classes expose the methods for acting, updating and communication. The *model* classes construct the computation graph to provide required TF placeholders and TF ops according to which kind of *agent* they are plugged in.
 
 Existing *agent* classes are organized as follow. No matter what kind of *model* is adopted, `Agent` provide unified interfaces for runing RL algorithms in a standalone mode. As for distributed setting, `ActorLearner` defines the roles; `SyncAgent` and `AsyncAgent` specialize the sync/async features; and their subclasses further specialize concrete algorithms.
-![](https://github.com/AlibabaPAI/easy_rl_doc/blob/master/figures/agent_classes.png?raw=true)
+![](https://img.alicdn.com/tfs/TB1d5.vq7Y2gK0jSZFgXXc5OFXa-1486-348.png)
 
 Existing *model* classes are organized as follow. We loosely defines the behaviors of any subclass via the base class `Model`. Meanwhile, we have implemented many widely-adopted *model*s. Users are encouraged to inherit the `Model` class and override some of its methods, so that they can use another kind of network structure, loss function, or even the optimization algorithm.
-![](https://github.com/AlibabaPAI/easy_rl_doc/blob/master/figures/model_classes.png?raw=true)
+![](https://img.alicdn.com/tfs/TB1QoZuq.T1gK0jSZFhXXaAtVXa-820-176.png)
 
 ## A Comprehensive Suite
 EasyRL provides many popular RL algorithms (in both standalone and distributed setting). The following table gives a comparison between EasyRL and some impactful RL packages where o stands for existence of the corresponding functionality while x means no such one.
@@ -80,10 +80,10 @@ We empirically evaluate the performance of EasyRL. Our experiment focuses on the
 
 ### Impala
 First, we study, how the throughput changes along the number of actors increases. As you can see from the following figure, once there are sufficient learners to consume the training samples without blocking the actors (i.e., the blue line corresponding to 16 learners), the throughput is almost linearly proportional to the number of actors.
-![](https://github.com/AlibabaPAI/easy_rl_doc/blob/master/figures/impala_throughput.png?raw=true)
+![](https://img.alicdn.com/tfs/TB1S3Axq4v1gK0jSZFFXXb0sXXa-934-453.png)
 
 Then we look into the convergence rate which is particularly critical for distributed RL, as a high throughput may not ensure solving a problem quickly if the generated samples cannot be effectively exploited. The following figure surprisingly shows that with a 4-*learner*, 4-*buffer*, 32-*actor* setting (yellow line), our implementation can solve Pong within 3 minutes.
-![](https://github.com/AlibabaPAI/easy_rl_doc/blob/master/figures/impala_convergence.png?raw=true)
+![](https://img.alicdn.com/tfs/TB1NHAxq1L2gK0jSZFmXXc7iXXa-1730-1016.png)
 We also present the wallclock time needed to reach 17+ scores for each setting.
 
 |Setting|​4a1m1|8a2m2l|8a1m1|16a2m2l|32a4m4l|
@@ -94,10 +94,10 @@ From Ray RLLib's [results](https://ray.readthedocs.io/en/latest/rllib-algorithms
 
 ### ApeX
 We carefully analyzed the relationships between the throughput of ApeX and the numbers of *actor*, *memory*, and *learner* processes. As an off-policy algorithm with replay buffers, the bottleneck is either the *memory* or the *learner*. As the following figure shows, once we had more than 2 *memory* processes, the only *learner* process becomes the bottleneck.
-![](https://github.com/AlibabaPAI/easy_rl_doc/blob/master/figures/apex_throughput.png?raw=true)
+![](https://img.alicdn.com/tfs/TB1tn3uq9f2gK0jSZFPXXXsopXa-1300-728.png)
 
 We also observed the changes in convergence rate against different number of *memory* processes. Even though increasing the number of *memory* processes cannot increase the throughput drastically, the *4a8m1l* setting outperforms others by a considerable margin. When compared with Ray RLLib's [results](https://ray.readthedocs.io/en/latest/rllib-algorithms.html#distributed-prioritized-experience-replay-ape-x) which uses 32 actors to reach 17+ scores until around 3600 seconds, our *4a8m1l* setting surprisingly reduces around half of the time.
-![](https://github.com/AlibabaPAI/easy_rl_doc/blob/master/figures/apex_convergence.png?raw=true)
+![](https://img.alicdn.com/tfs/TB1VVEuq8v0gK0jSZKbXXbK2FXa-1892-994.png)
 
 In a word, our design of actor-learner architecture is expressive for both on-policy and off-policy algorithms and enables us to easily develop some popular RL algorithms with comparable or better performance w.r.t. the SOTA RL packages.
 
