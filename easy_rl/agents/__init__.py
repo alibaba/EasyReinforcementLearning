@@ -27,6 +27,7 @@ from easy_rl.agents.a3c_agent import A3CAgent
 from easy_rl.agents.sync_agent import SyncAgent
 from easy_rl.agents.dppo_agent import DPPOAgent
 from easy_rl.agents.es_agent import ESAgent
+from easy_rl.agents.batch_agent import BatchAgent
 
 agents = dict(
     Agent=Agent,
@@ -34,9 +35,10 @@ agents = dict(
     Impala=ImpalaAgent,
     A3C=A3CAgent,
     DPPO=DPPOAgent,
-    ES=ESAgent)
+    ES=ESAgent,
+    BA=BatchAgent)
 
 __all__ = [
     "AgentBase", "Agent", "ActorLearnerAgent", "AsyncAgent", "ApexAgent",
-    "ImpalaAgent", "A3CAgent", "SyncAgent", "DPPOAgent", "ESAgent"
+    "ImpalaAgent", "A3CAgent", "SyncAgent", "DPPOAgent", "ESAgent", "BatchAgent"
 ]

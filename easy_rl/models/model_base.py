@@ -34,7 +34,7 @@ class Model(object):
     """
 
     def __init__(self, obs_space, action_space, scope="model", **kwargs):
-        self.summary_ops = dict(train=[], act=[], extra=[])
+        self.summary_ops = dict(train=[], act=[], extra=[], clone_train=[])
         self._build_ph_op(obs_space=obs_space, action_space=action_space)
         self._build_graph(scope=scope, **kwargs)
         self.add_extra_summary_op()
