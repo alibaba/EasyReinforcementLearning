@@ -26,6 +26,7 @@ from easy_rl.models.ddpg import DDPGModel
 from easy_rl.models.evolution_strategy import EvolutionStrategy
 from easy_rl.models.marwil import MarwilModel
 from easy_rl.models.linucb import LinUCBModel
+from easy_rl.models.batch_dqn import BatchDQNModel
 
 models = dict(
     PG=PGModel,
@@ -35,9 +36,10 @@ models = dict(
     Vtrace=VTraceModel,
     ES=EvolutionStrategy,
     Marwil=MarwilModel,
-    LinUCB=LinUCBModel)
+    LinUCB=LinUCBModel,
+    BCQ=BatchDQNModel)
 
 __all__ = [
     "Model", "PGModel", "PPOModel", "DQNModel", "DDPGModel", "VTraceModel",
-    "EvolutionStrategy", "MarwilModel", "LinUCBModel"
+    "EvolutionStrategy", "MarwilModel", "LinUCBModel", "BatchDQNModel"
 ]
