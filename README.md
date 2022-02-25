@@ -1,4 +1,4 @@
-# EasyRL
+# EasyReinforcementLearning (EasyRL)
 ![](https://img.shields.io/badge/language-python-blue.svg) ![](https://img.shields.io/badge/license-Apache-000000.svg)
 ## Overview
 In recent years, we have witnessed many impressive progresses of reinforcement learning (RL) including AlphaGo, OpenAI Five, etc. As for real-world applications, we have successfully applied RL to many E-commerce scenarios like session-based learning to rank, multi-turn conversational agent, etc. Compared with the supervised learning paradigm, the interactive nature of RL raises the bar of its application, as the practitioners have to
